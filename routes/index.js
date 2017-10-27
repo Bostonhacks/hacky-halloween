@@ -22,12 +22,12 @@ router.get('/doorway', (req, res, next) => {
   res.render('login/door')
 })
 
-router.post('/doorway', passport.authenticate('login', { failureRedirect: '/login' }, (req, res, next) => {
+router.post('/doorway', passport.authenticate('login', { failureRedirect: '/login-error' }), (req, res, next) => {
   res.redirect('/home')
 })
 
 router.get('/login-error', (req, res, next) => {
-  res.render('/login-error')
+  res.render('login/login-error')
 })
 
 router.get('/exit', (req, res, next) => {
