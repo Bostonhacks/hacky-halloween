@@ -2,10 +2,7 @@ const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
 
 module.exports = (passport) => {
-  passport.use('signup', new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password'
-  }, (username, password, done) => {
+  passport.use('signup', new LocalStrategy((username, password, done) => {
     User.findOne({ 'username': username }, (err, user) => {
       if (err) { return done(err) }
       if (user || password.length < 6) { return done(null, false) }
@@ -24,10 +21,7 @@ module.exports = (passport) => {
     })
   }))
 
-  passport.use('login', new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password'
-  }, (username, password, done) => {
+  passport.use('login', new LocalStrategy((username, password, done) => {
     User.findOne({ 'username': username }, (err, user) => {
       if (err) { return done(err) }
       if (user && user.validPassword(password)) { return done(null, user) }

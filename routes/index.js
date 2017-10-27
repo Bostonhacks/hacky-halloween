@@ -1,24 +1,42 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
+const passport = require('passport')
 
 router.get('/', (req, res, next) => {
-  res.render('index')
+  if (req.query.potion == 'emptyfelixfelicis') {
+    return res.redirect('/create-door')
+  } else {
+    return res.render('index')
+  }
 })
 
-router.get('/login', (req, res, next) => {
-  res.render('index')
+router.get('/create-door', (req, res, next) => {
+  res.render('login/create-door')
 })
 
-router.post('/login', (req, res, next) => {
-  res.render('index')
+router.post('/create-door', passport.authenticate('signup', { failureRedirect: '/login-error' }), (req, res, next) => {
+  res.redirect('/doorway')
 })
 
-router.get('/logout', (req, res, next) => {
-  res.render('index')
+router.get('/doorway', (req, res, next) => {
+  res.render('login/door')
 })
 
-router.get('/home', (req, res, next) => {
-  res.render('index')
+router.post('/doorway', passport.authenticate('login', { failureRedirect: '/login' }, (req, res, next) => {
+  res.redirect('/home')
+})
+
+router.get('/login-error', (req, res, next) => {
+  res.render('/login-error')
+})
+
+router.get('/exit', (req, res, next) => {
+  req.logout()
+  res.redirect('/')
+})
+
+router.get('/home', isLoggedIn, (req, res, next) => {
+  res.render('home')
 })
 
 router.get('/redgreenbluesilverorange', (req, res, next) => {
@@ -88,5 +106,13 @@ router.post('/hackathonshift', (req, res, next) => {
 router.get('/winnerwinnerchickendinner', (req, res, next) => {
   res.render('index')
 })
+
+function isLoggedIn (req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  } else {
+    res.redirect('/doorway')
+  }
+}
 
 module.exports = router

@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h1 Know what you're getting into.
+  img(src='https://i.imgur.com/c4jt321.png')
+  h4 If I were you, I'd save this page just in case I fall asleep an need to come back later.
+  form(action='/create-door' method='post')
+    h4 username
+    input(type="text" name="username")
+    <br>
+    h4 password
+    input(type="text" name="password")
+    <br>
+    <br>
+    input(type="submit" name="login" value="login")

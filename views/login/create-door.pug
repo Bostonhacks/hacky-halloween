@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h1 Welcome, traveler. Sign up below. Password >= 6 characters please.
+  img(src='https://media.giphy.com/media/Yll7MMdHv0oEw/giphy.gif')
+  form(action='/create-door' method='post')
+    h4 username
+    input(type="text" name="username")
+    <br>
+    h4 password
+    input(type="text" name="password")
+    <br>
+    <br>
+    input(type="submit")
