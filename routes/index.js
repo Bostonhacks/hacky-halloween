@@ -56,10 +56,11 @@ router.get('/inthedms', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/inthedms', isLoggedIn, (req, res, next) => {
-  if (req.body.c1.toLowerCase() == process.env.c1) {
+  if (req.body.c2.toLowerCase() == process.env.c1) {
     
+  } else {
+    res.redirect('/home')
   }
-  res.render('index')
 })
 
 router.get('/salem', isLoggedIn, (req, res, next) => {
@@ -67,7 +68,11 @@ router.get('/salem', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/salem', isLoggedIn, (req, res, next) => {
-  res.render('index')
+  if (req.body.c3.toLowerCase() == process.env.c1) {
+    
+  } else {
+    res.redirect('/home')
+  }
 })
 
 router.get('/circumferenceover2r', isLoggedIn, (req, res, next) => {
@@ -75,7 +80,11 @@ router.get('/circumferenceover2r', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/circumferenceover2r', isLoggedIn, (req, res, next) => {
-  res.render('index')
+  if (req.body.c4.toLowerCase() == process.env.c1) {
+    
+  } else {
+    res.redirect('/home')
+  }
 })
 
 router.get('/dentistappointment', isLoggedIn, (req, res, next) => {
@@ -83,7 +92,11 @@ router.get('/dentistappointment', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/dentistappointment', isLoggedIn, (req, res, next) => {
-  res.render('index')
+  if (req.body.c5.toLowerCase() == process.env.c1) {
+    
+  } else {
+    res.redirect('/home')
+  }
 })
 
 router.get('/passthepolyjuice', isLoggedIn, (req, res, next) => {
@@ -91,7 +104,11 @@ router.get('/passthepolyjuice', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/passthepolyjuice', isLoggedIn, (req, res, next) => {
-  res.render('index')
+  if (req.body.c6.toLowerCase() == process.env.c1) {
+    
+  } else {
+    res.redirect('/home')
+  }
 })
 
 router.get('/lostchild', isLoggedIn, (req, res, next) => {
@@ -99,7 +116,11 @@ router.get('/lostchild', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/lostchild', isLoggedIn, (req, res, next) => {
-  res.render('index')
+  if (req.body.c7.toLowerCase() == process.env.c1) {
+    
+  } else {
+    res.redirect('/home')
+  }
 })
 
 router.get('/hackathonshift', isLoggedIn, (req, res, next) => {
@@ -107,12 +128,25 @@ router.get('/hackathonshift', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/hackathonshift', isLoggedIn, (req, res, next) => {
-  res.render('index')
+  if (req.body.c8.toLowerCase() == process.env.c1) {
+    
+  } else {
+    res.redirect('/home')
+  }
 })
 
 router.get('/winnerwinnerchickendinner', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
+
+router.post('/winnerwinnerchickendinner', isLoggedIn, (req, res, next) => {
+  if (req.body.c9.toLowerCase() == process.env.c1) {
+    
+  } else {
+    res.redirect('/home')
+  }
+})
+
 
 function isLoggedIn (req, res, next) {
   if (req.isAuthenticated()) {
