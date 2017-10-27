@@ -46,8 +46,9 @@ router.get('/redgreenbluesilverorange', isLoggedIn, (req, res, next) => {
 router.post('/redgreenbluesilverorange', isLoggedIn, (req, res, next) => {
   if (req.body.c1.toLowerCase() == process.env.c1) {
 
+  } else {
+    res.redirect('/home')
   }
-  res.redirect('/home')
 })
 
 router.get('/inthedms', isLoggedIn, (req, res, next) => {
@@ -55,6 +56,9 @@ router.get('/inthedms', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/inthedms', isLoggedIn, (req, res, next) => {
+  if (req.body.c1.toLowerCase() == process.env.c1) {
+    
+  }
   res.render('index')
 })
 
