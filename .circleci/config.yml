@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/hacky-halloween
+    docker:
+      - image: circleci/node:7
+      - image: mongo:3.4.4
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: test
+          command: npm test
+      - deploy:
+          name: deploy-bostonhacks-hacky-halloween-prod
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              scp -o StrictHostKeyChecking=no -r ~/hacky-halloween/bin circleci@${BOSTONHACKS_IP_ADDR}:/var/www/hacky-halloween/
+              scp -o StrictHostKeyChecking=no -r ~/hacky-halloween/config circleci@${BOSTONHACKS_IP_ADDR}:/var/www/hacky-halloween/
+              scp -o StrictHostKeyChecking=no -r ~/hacky-halloween/models circleci@${BOSTONHACKS_IP_ADDR}:/var/www/hacky-halloween/
+              scp -o StrictHostKeyChecking=no -r ~/hacky-halloween/public circleci@${BOSTONHACKS_IP_ADDR}:/var/www/hacky-halloween/
+              scp -o StrictHostKeyChecking=no -r ~/hacky-halloween/routes circleci@${BOSTONHACKS_IP_ADDR}:/var/www/hacky-halloween/
+              scp -o StrictHostKeyChecking=no -r ~/hacky-halloween/views circleci@${BOSTONHACKS_IP_ADDR}:/var/www/hacky-halloween/
+              scp -o StrictHostKeyChecking=no -r ~/hacky-halloween/app.js circleci@${BOSTONHACKS_IP_ADDR}:/var/www/hacky-halloween/
+              scp -o StrictHostKeyChecking=no -r ~/hacky-halloween/package.json circleci@${BOSTONHACKS_IP_ADDR}:/var/www/hacky-halloween/
+              cat ~/hacky-halloween/scripts/restart.sh | ssh -o StrictHostKeyChecking=no -tt circleci@${BOSTONHACKS_IP_ADDR}
+            fi

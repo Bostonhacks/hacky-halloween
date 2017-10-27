@@ -3,7 +3,7 @@ const router = express.Router()
 const passport = require('passport')
 
 router.get('/', (req, res, next) => {
-  if (req.query.potion == 'emptyfelixfelicis') {
+  if (req.query.potion == process.env.c0) {
     return res.redirect('/create-door')
   } else {
     return res.render('index')
@@ -44,8 +44,8 @@ router.get('/redgreenbluesilverorange', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/redgreenbluesilverorange', isLoggedIn, (req, res, next) => {
-  if (req.body.c1.toLowerCase() == 'boo') {
-    
+  if (req.body.c1.toLowerCase() == process.env.c1) {
+
   }
   res.redirect('/home')
 })
