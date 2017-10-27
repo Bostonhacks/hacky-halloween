@@ -2,8 +2,17 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt-nodejs')
 
 const userSchema = mongoose.Schema({
-  username: String,
-  password: String
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  challenge1: { type: Boolean, default: false },
+  challenge2: { type: Boolean, default: false },
+  challenge3: { type: Boolean, default: false },
+  challenge4: { type: Boolean, default: false },
+  challenge5: { type: Boolean, default: false },
+  challenge6: { type: Boolean, default: false },
+  challenge7: { type: Boolean, default: false },
+  challenge8: { type: Boolean, default: false },
+  challenge9: { type: Boolean, default: false }
 })
 
 userSchema.methods.generateHash = function (password) {

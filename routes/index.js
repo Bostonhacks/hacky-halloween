@@ -39,71 +39,74 @@ router.get('/home', isLoggedIn, (req, res, next) => {
   res.render('home')
 })
 
-router.get('/redgreenbluesilverorange', (req, res, next) => {
+router.get('/redgreenbluesilverorange', isLoggedIn, (req, res, next) => {
   res.render('puzzles/rgbso.pug')
 })
 
-router.post('/redgreenbluesilverorange', (req, res, next) => {
+router.post('/redgreenbluesilverorange', isLoggedIn, (req, res, next) => {
+  if (req.body.c1.toLowerCase() == 'boo') {
+    
+  }
+  res.redirect('/home')
+})
+
+router.get('/inthedms', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.get('/inthedms', (req, res, next) => {
+router.post('/inthedms', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.post('/inthedms', (req, res, next) => {
+router.get('/salem', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.get('/salem', (req, res, next) => {
+router.post('/salem', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.post('/salem', (req, res, next) => {
+router.get('/circumferenceover2r', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.get('/circumferenceover2r', (req, res, next) => {
+router.post('/circumferenceover2r', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.post('/circumferenceover2r', (req, res, next) => {
+router.get('/dentistappointment', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.get('/dentistappointment', (req, res, next) => {
+router.post('/dentistappointment', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.post('/dentistappointment', (req, res, next) => {
+router.get('/passthepolyjuice', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.get('/passthepolyjuice', (req, res, next) => {
+router.post('/passthepolyjuice', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.post('/passthepolyjuice', (req, res, next) => {
+router.get('/lostchild', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.get('/lostchild', (req, res, next) => {
+router.post('/lostchild', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.post('/lostchild', (req, res, next) => {
+router.get('/hackathonshift', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.get('/hackathonshift', (req, res, next) => {
+router.post('/hackathonshift', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
-router.post('/hackathonshift', (req, res, next) => {
-  res.render('index')
-})
-
-router.get('/winnerwinnerchickendinner', (req, res, next) => {
+router.get('/winnerwinnerchickendinner', isLoggedIn, (req, res, next) => {
   res.render('index')
 })
 
@@ -112,6 +115,22 @@ function isLoggedIn (req, res, next) {
     return next()
   } else {
     res.redirect('/doorway')
+  }
+}
+
+function set1Complete (req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  } else {
+    res.redirect('/home')
+  }
+}
+
+function set2Complete (req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  } else {
+    res.redirect('/home')
   }
 }
 
