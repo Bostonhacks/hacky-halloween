@@ -120,26 +120,13 @@ router.post('/dentistappointment', isLoggedIn, (req, res, next) => {
   return res.redirect('/home')
 })
 
-router.get('/passthepolyjuice', isLoggedIn, (req, res, next) => {
-  res.render('puzzles/twilio.pug')
-})
-
-router.post('/passthepolyjuice', isLoggedIn, (req, res, next) => {
-  if (req.body.c6.toLowerCase().replace(/\s/g,'')  == process.env.c6) {
-    User.update({ _id: req.user.id }, { $set: { challenge6: true }}, function (err, result) {
-      if (err) { return res.render('/error') }
-    })
-  }
-  return res.redirect('/home')
-})
-
 router.get('/lostchild', isLoggedIn, (req, res, next) => {
   res.render('puzzles/final')
 })
 
 router.post('/lostchild', isLoggedIn, (req, res, next) => {
-  if (req.body.c7.toLowerCase() == process.env.c7) {
-    User.update({ _id: req.user.id }, { $set: { challenge7: true }}, function (err, result) {
+  if (req.body.c6.toLowerCase() == process.env.c6) {
+    User.update({ _id: req.user.id }, { $set: { challenge6: true }}, function (err, result) {
       if (err) { return res.render('/error') }
     })
   }
