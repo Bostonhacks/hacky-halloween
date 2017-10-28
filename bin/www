@@ -10,6 +10,8 @@ var app = require('../app');
 var debug = require('debug')('hacky-halloween:server');
 var http = require('http');
 
+var path = require('path')
+
 /**
  * Get port from environment and store in Express.
  */
