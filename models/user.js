@@ -10,9 +10,7 @@ const userSchema = mongoose.Schema({
   challenge4: { type: Boolean, default: false },
   challenge5: { type: Boolean, default: false },
   challenge6: { type: Boolean, default: false },
-  challenge7: { type: Boolean, default: false },
-  challenge8: { type: Boolean, default: false },
-  challenge9: { type: Boolean, default: false }
+  challenge7: { type: Boolean, default: false }
 })
 
 userSchema.methods.generateHash = function (password) {

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
+const debug = require('debug')('index')
 
 router.get('/', (req, res, next) => {
   if (req.query.potion == process.env.c0) {
@@ -36,11 +37,18 @@ router.get('/exit', (req, res, next) => {
 })
 
 router.get('/home', isLoggedIn, (req, res, next) => {
-  res.render('home')
+  res.render('home', {
+    set1: set1Complete(req.user),
+    set2: set2Complete(req.user)
+  })
 })
 
 router.get('/redgreenbluesilverorange', isLoggedIn, (req, res, next) => {
   res.render('puzzles/rgbso.pug')
+})
+
+router.get('/mbta', isLoggedIn, (req, res, next) => {
+  res.redirect('/mbta.pdf')
 })
 
 router.post('/redgreenbluesilverorange', isLoggedIn, (req, res, next) => {
@@ -52,11 +60,11 @@ router.post('/redgreenbluesilverorange', isLoggedIn, (req, res, next) => {
 })
 
 router.get('/inthedms', isLoggedIn, (req, res, next) => {
-  res.render('index')
+  res.render('puzzles/instagram.pug')
 })
 
 router.post('/inthedms', isLoggedIn, (req, res, next) => {
-  if (req.body.c2.toLowerCase() == process.env.c1) {
+  if (req.body.c2.toLowerCase() == process.env.c2) {
     
   } else {
     res.redirect('/home')
@@ -64,23 +72,23 @@ router.post('/inthedms', isLoggedIn, (req, res, next) => {
 })
 
 router.get('/salem', isLoggedIn, (req, res, next) => {
-  res.render('index')
+  res.render('puzzles/imgmagick.pug')
 })
 
 router.post('/salem', isLoggedIn, (req, res, next) => {
-  if (req.body.c3.toLowerCase() == process.env.c1) {
+  if (req.body.c3.toLowerCase() == process.env.c3) {
     
   } else {
     res.redirect('/home')
   }
 })
 
-router.get('/circumferenceover2r', isLoggedIn, (req, res, next) => {
-  res.render('index')
+router.get('/whoyougonnacall', isLoggedIn, (req, res, next) => {
+  res.render('puzzles/imgmagick.pug')  
 })
 
-router.post('/circumferenceover2r', isLoggedIn, (req, res, next) => {
-  if (req.body.c4.toLowerCase() == process.env.c1) {
+router.post('/whoyougonnacall', isLoggedIn, (req, res, next) => {
+  if (req.body.c4.toLowerCase() == process.env.c4) {
     
   } else {
     res.redirect('/home')
@@ -92,7 +100,7 @@ router.get('/dentistappointment', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/dentistappointment', isLoggedIn, (req, res, next) => {
-  if (req.body.c5.toLowerCase() == process.env.c1) {
+  if (req.body.c5.toLowerCase() == process.env.c5) {
     
   } else {
     res.redirect('/home')
@@ -104,7 +112,7 @@ router.get('/passthepolyjuice', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/passthepolyjuice', isLoggedIn, (req, res, next) => {
-  if (req.body.c6.toLowerCase() == process.env.c1) {
+  if (req.body.c6.toLowerCase() == process.env.c6) {
     
   } else {
     res.redirect('/home')
@@ -116,37 +124,12 @@ router.get('/lostchild', isLoggedIn, (req, res, next) => {
 })
 
 router.post('/lostchild', isLoggedIn, (req, res, next) => {
-  if (req.body.c7.toLowerCase() == process.env.c1) {
+  if (req.body.c7.toLowerCase() == process.env.c7) {
     
   } else {
     res.redirect('/home')
   }
 })
-
-router.get('/hackathonshift', isLoggedIn, (req, res, next) => {
-  res.render('index')
-})
-
-router.post('/hackathonshift', isLoggedIn, (req, res, next) => {
-  if (req.body.c8.toLowerCase() == process.env.c1) {
-    
-  } else {
-    res.redirect('/home')
-  }
-})
-
-router.get('/winnerwinnerchickendinner', isLoggedIn, (req, res, next) => {
-  res.render('index')
-})
-
-router.post('/winnerwinnerchickendinner', isLoggedIn, (req, res, next) => {
-  if (req.body.c9.toLowerCase() == process.env.c1) {
-    
-  } else {
-    res.redirect('/home')
-  }
-})
-
 
 function isLoggedIn (req, res, next) {
   if (req.isAuthenticated()) {
@@ -156,20 +139,14 @@ function isLoggedIn (req, res, next) {
   }
 }
 
-function set1Complete (req, res, next) {
-  if (req.isAuthenticated()) {
-    return next()
-  } else {
-    res.redirect('/home')
-  }
+function set1Complete (user) {
+  if (!user) return false
+  return user.challenge1 && user.challenge2 && user.challenge3
 }
 
-function set2Complete (req, res, next) {
-  if (req.isAuthenticated()) {
-    return next()
-  } else {
-    res.redirect('/home')
-  }
+function set2Complete (user) {
+  if (!user) return false
+  return user.challenge4 && user.challenge5 && user.challenge6
 }
 
 module.exports = router
