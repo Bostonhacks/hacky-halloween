@@ -1,0 +1,13 @@
+div
+  form(action='/lostchild' method='post')
+    h4 Challenge 7:
+    a(href='/lostchild')
+      h4 Getting around
+    if challenge7
+      a(href='/')
+        h4 You. Made. It.
+    else
+      input(type="text" name="c7")
+      <br>
+      <br>
+      input(type="submit")
