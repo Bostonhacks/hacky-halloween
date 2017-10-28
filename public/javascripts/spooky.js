@@ -15,7 +15,7 @@ function createPotion() {
     console.log('Its going to be a good halloween.')
     window.location.replace(window.location + '?potion=' + cauldron)
   } else {
-    window.setTimeout(createPotion, 10000)
+    console.log('Gosh darn it Severus!')
   }
 }
 
